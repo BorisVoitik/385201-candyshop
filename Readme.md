@@ -1,7 +1,7 @@
 # Личный проект «Кэндишоп» [![Build status][travis-image]][travis-url]
 
 * Студент: [Boris Voytik](https://up.htmlacademy.ru/javascript/15/user/385201).
-* Наставник: `Сергей Рябов`.
+* Наставник: `Сергей`.
 
 ---
 
