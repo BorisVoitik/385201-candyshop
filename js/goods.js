@@ -110,13 +110,13 @@ var getGoods = function () {
     goodsObject.price = getRandomFromRange(100, 1500);
     goodsObject.weight = getRandomFromRange(30, 300);
     goodsObject.rating = {
-      value = getRandomFromRange(1, 5),
-      number = getRandomFromRange(10, 900)
+      value: getRandomFromRange(1, 5),
+      number: getRandomFromRange(10, 900)
     };
     goodsObject.nutritionFacts = {
-      sugar = hasSugar,
-      energy = getRandomFromRange(70, 500),
-      contents = contents.sort(getRandomStrict)[0]
+      sugar: hasSugar,
+      energy: getRandomFromRange(70, 500),
+      contents: contents.sort(getRandomStrict)[0]
     };
     goods.push(goodsObject);
 
