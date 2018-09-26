@@ -216,7 +216,7 @@ var addGoodsCardItems = function (picture) {
       sugarFact.textContent = 'Без сахара';
     }
   };
-  getSugarFacts(goodsArray[0]nutritionFacts.sugar);
+  getSugarFacts(goodsArray[0].nutritionFacts.sugar);
 
 
   var addContentsCards = function (content) {
