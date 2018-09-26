@@ -103,7 +103,8 @@ var getRandomFromRange = function (min, max) {
 
 var getGoods = function () {
   for (var i = 0; i < goodsAmount; i++) {
-
+    
+    var goodsObject = {};
     goodsObject.name = names.sort(getRandomStrict)[0];
     goodsObject.picture = pictures.sort(getRandomStrict)[0];
     goodsObject.amount = getRandomFromRange(0, 20);
@@ -132,8 +133,7 @@ var uselessCatalogLoad = document.querySelector('.catalog__load');
 uselessCatalogCards.classList.remove('catalog__cards--load');
 uselessCatalogLoad.classList.add('visually-hidden');
 
-
-var addGoodsCardItems = function (picture) {
+var addGoodsCardItems = function () {
   var template = document.querySelector('#card').content;
 
   var getCardsAmount = function (allCards) {
@@ -203,13 +203,13 @@ var addGoodsCardItems = function (picture) {
     var newGoodsCard = template.cloneNode(true);
     var currentGood = goods[i];
 
-    getCardsAmount(currentGood.amount);
-    addCardTitles(currentGood.name);
-    addCardPriceAndWeight(currentGood.price, currentGood.weight);
-    getRatingStars(currentGood.rating.value);
-    addStarCounts(currentGood.rating.number);
-    getSugarFacts(currentGood.nutritionFacts.sugar);
-    addStarCounts(currentGood.nutritionFacts.contents);
+    getCardsAmount(currentGood.amount, newGoodsCard);
+    addCardTitles(currentGood.name, newGoodsCard);
+    addCardPriceAndWeight(currentGood.price, currentGood.weight, newGoodsCard);
+    getRatingStars(currentGood.rating.value, newGoodsCard);
+    addStarCounts(currentGood.rating.number, newGoodsCard);
+    getSugarFacts(currentGood.nutritionFacts.sugar, newGoodsCard);
+    addContentsCards(currentGood.nutritionFacts.contents, newGoodsCard);
 
   }
 };
@@ -236,15 +236,14 @@ var addCardAddedItems = function () {
     var goodsPicture = addedProducts.querySelector('.card-order__img');
     goodsPicture.src = picture;
   };
-  
 
   for (var i = 0; i < addedGoodsAmount; i++) {
     var cardElements = template.cloneNode(true);
     var addedGoods = goods[i];
 
-    addOrderCardsTitle(addedGoods.name);
-    addCardOrderPrice(addedGoods.price);
-    addNewPicture(addedGoods.picture);
+    addOrderCardsTitle(addedGoods.name, cardElements);
+    addCardOrderPrice(addedGoods.price, cardElements);
+    addNewPicture(addedGoods.picture, cardElements);
   }
 
   addedProducts.push(cardElements);
