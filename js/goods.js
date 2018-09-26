@@ -260,24 +260,3 @@ var uselessCardEmpty = document.querySelector('.goods__card-empty');
 
 uselessGoodsCards.classList.remove('goods__cards--empty');
 uselessCardEmpty.classList.add('visually-hidden');
-  addOrderCardsTitle(goodsArray[0].name);
-
-  var addCardOrderPrice = function (price) {
-    var orderCardPrice = cardAddedArray.querySelector('.card-order__price');
-    orderCardPrice.textContent = price;
-  };
-  addCardOrderPrice(goodsArray[0].price);
-
-
-  var newTemplate = document.querySelector('.goods__cards');
-  newTemplate.appendChild(cardAddedArray);
-
-};
-addCardAddedItems();
-
-
-var uselessGoodsCards = document.querySelector('.goods__cards');
-var uselessCardEmpty = document.querySelector('.goods__card-empty');
-
-uselessGoodsCards.classList.remove('goods__cards--empty');
-uselessCardEmpty.classList.add('visually-hidden');
