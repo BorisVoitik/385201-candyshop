@@ -165,14 +165,14 @@ var addGoodsCardItems = function (picture) {
       cardsCatalog.classList.add('card--in-stock');
     }
   };
-  getCardsAmount(goodsArray[goodsObject.amount]);
+  getCardsAmount(goodsArray[0].amount]);
 
 
   var addCardTitles = function (title) {
     var cardTitle = document.querySelector('.card__title');
     cardTitle.textContent = title;
   };
-  addCardTitles(goodsArray[goodsObject.name]);
+  addCardTitles(goodsArray[0].name);
 
 
   var addCardPriceAndWeight = function (price, weight) {
@@ -181,7 +181,7 @@ var addGoodsCardItems = function (picture) {
     cardPrice.textContent = price;
     cardWeight.textContent = '/ ' + weight + ' Г';
   };
-  addCardPriceAndWeight (goodsArray[goodsObject.price], goodsArray[goodsObject.weight]);
+  addCardPriceAndWeight (goodsArray[0].price, goodsArray[0].weight);
 
 
   var getRatingStars = function (stars) {
@@ -198,14 +198,14 @@ var addGoodsCardItems = function (picture) {
       ratingStars.classList.add ('stars__rating--five');
     }
   };
-  getRatingStars(goodsArray[goodsObject.rating.value]);
+  getRatingStars(goodsArray[0].rating.value);
 
 
   var addStarCounts = function (rating) {
     var starRating = document.querySelector('.star__count');
     starRating.textContent = rating;
   };
-  addStarCounts(goodsArray[goodsObject.rating.number]);
+  addStarCounts(goodsArray[0].rating.number);
 
 
   var getSugarFacts = function (isSugarAvailable) {
@@ -216,18 +216,18 @@ var addGoodsCardItems = function (picture) {
       sugarFact.textContent = 'Без сахара';
     }
   };
-  getSugarFacts(goodsArray[goodsObject.nutritionFacts.sugar]);
+  getSugarFacts(goodsArray[0]nutritionFacts.sugar);
 
 
   var addContentsCards = function (content) {
     var cardsContentComposition = document.querySelector('.card__composition-list');
     cardsContentComposition.textContent = content;
   };
-  addStarCounts(goodsArray[goodsObject.nutritionFacts.contents]);
+  addStarCounts(goodsArray[0].nutritionFacts.contents);
 
 
 };
-addGoodsCardItems(goodsArray[goodsObject.picture]);
+addGoodsCardItems(goodsArray[0].picture);
 
 
 var cardAddedArray = [];
@@ -243,13 +243,13 @@ var addCardAddedItems = function () {
     var orderCardTitle = cardAddedArray.querySelector('.card-order__title');
     orderCardTitle.textContent = name;
   };
-  addOrderCardsTitle(goodsArray[goodsObject.name]);
+  addOrderCardsTitle(goodsArray[0].name);
 
   var addCardOrderPrice = function (price) {
     var orderCardPrice = cardAddedArray.querySelector('.card-order__price');
     orderCardPrice.textContent = price;
   };
-  addCardOrderPrice(goodsArray[goodsObject.price]);
+  addCardOrderPrice(goodsArray[0].price);
 
 
   var newTemplate = document.querySelector ('.goods__cards');
