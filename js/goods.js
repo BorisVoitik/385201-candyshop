@@ -165,7 +165,7 @@ var addGoodsCardItems = function (picture) {
       cardsCatalog.classList.add('card--in-stock');
     }
   };
-  getCardsAmount(goodsArray[0].amount]);
+  getCardsAmount(goodsArray[0].amount);
 
 
   var addCardTitles = function (title) {
