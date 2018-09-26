@@ -1,9 +1,9 @@
 'use strict';
 
-var goodsArray = [];
+var goods = [];
+var goodsAmount = 26;
 
-
-var namesArray = [
+var names = [
   'Чесночные сливки',
   'Молочная хрюша',
   'Грибной шейк',
@@ -34,7 +34,7 @@ var namesArray = [
 ];
 
 
-var picturesArray = [
+var pictures = [
   'img/cards/gum-cedar.jpg',
   'img/cards/ice-cucumber.jpg',
   'img/cards/marmalade-beer.jpg',
@@ -66,7 +66,7 @@ var picturesArray = [
 ];
 
 
-var contentsArray = [
+var contents = [
   'молоко',
   'сливки',
   'вода',
@@ -88,10 +88,10 @@ var contentsArray = [
 ];
 
 
-var sugarAbout = Math.random () >= 0.5;
+var hasSugar = Math.random() >= 0.5;
 
 
-var getRandomStrict = function (str) {
+var getRandomStrict = function () {
   return Math.random() - 0.5;
 };
 
@@ -102,41 +102,26 @@ var getRandomFromRange = function (min, max) {
 
 
 var getGoods = function () {
-  for (var i = 0; i < 26; i++) {
-		
-  var goodsObject = {
-      name: '',
-      picture: '',
-      amount: '',
-      price: '',
-      weight: '',
-      rating: {
-        value: '',
-        number: '',
-      },
-      nutritionFacts: {
-        sugar: '',
-        energy: '',
-        contents: '',
-      }
-};
+  for (var i = 0; i < goodsAmount; i++) {
 
-  goodsObject.name = namesArray.sort(getRandomStrict)[0];
-  goodsObject.picture = picturesArray.sort(getRandomStrict)[0];
-  goodsObject.amount = getRandomFromRange (0, 20);
-  goodsObject.price = getRandomFromRange (100, 1500);
-  goodsObject.weight = getRandomFromRange (30, 300);
-  goodsObject.rating.value = getRandomFromRange (1, 5);
-  goodsObject.rating.number = getRandomFromRange (10, 900);
-  goodsObject.nutritionFacts.sugar = sugarAbout;
-  goodsObject.nutritionFacts.energy = getRandomFromRange (70, 500);
-  goodsObject.nutritionFacts.contents = contentsArray.sort(getRandomStrict)[0];
-
-  goodsArray.push(goodsObject);
+    var goodsObject = {};
+    goodsObject.name = names.sort(getRandomStrict)[0];
+    goodsObject.picture = pictures.sort(getRandomStrict)[0];
+    goodsObject.amount = getRandomFromRange(0, 20);
+    goodsObject.price = getRandomFromRange(100, 1500);
+    goodsObject.weight = getRandomFromRange(30, 300);
+    goodsObject.rating = {
+      value: getRandomFromRange(1, 5),
+      number: getRandomFromRange(10, 900)
+    };
+    goodsObject.nutritionFacts = {
+      sugar: hasSugar,
+      energy: getRandomFromRange(70, 500),
+      contents: contents.sort(getRandomStrict)[0]
+    };
+    goods.push(goodsObject);
 
   }
-
-  return goodsArray;
 
 };
 getGoods();
@@ -148,64 +133,55 @@ var uselessCatalogLoad = document.querySelector('.catalog__load');
 uselessCatalogCards.classList.remove('catalog__cards--load');
 uselessCatalogLoad.classList.add('visually-hidden');
 
-
-var addGoodsCardItems = function (picture) {
-  var template = document.querySelector ('#card').content;
-  for (var i = 0; i < picture; i++) {
-    var newGoodsCard = template.cloneNode(true);
-  }
+var addGoodsCardItems = function () {
+  var template = document.querySelector('#card').content;
 
   var getCardsAmount = function (allCards) {
-  var cardsCatalog = document.querySelector('.catalog__card');
+    var cardsCatalog = document.querySelector('.catalog__card');
     if (allCards >= 1 && allCards <= 5) {
       cardsCatalog.classList.add('card--little');
-    } else if (allCards = 0) {
+    } else if (allCards === 0) {
       cardsCatalog.classList.add('card--soon');
     } else {
       cardsCatalog.classList.add('card--in-stock');
     }
   };
-  getCardsAmount(goodsArray[goodsObject.amount]);
 
 
   var addCardTitles = function (title) {
     var cardTitle = document.querySelector('.card__title');
     cardTitle.textContent = title;
   };
-  addCardTitles(goodsArray[goodsObject.name]);
 
 
   var addCardPriceAndWeight = function (price, weight) {
-    var cardPrice = document.querySelector ('.card__price');
-    var cardWeight = document.querySelector ('.card__weight');
+    var cardPrice = document.querySelector('.card__price');
+    var cardWeight = document.querySelector('.card__weight');
     cardPrice.textContent = price;
     cardWeight.textContent = '/ ' + weight + ' Г';
   };
-  addCardPriceAndWeight (goodsArray[goodsObject.price], goodsArray[goodsObject.weight]);
 
 
   var getRatingStars = function (stars) {
-		var ratingStars = document.querySelector ('.stars__rating');
+    var ratingStars = document.querySelector('.stars__rating');
     if (stars === 1) {
-      ratingStars.classList.add ('stars__rating--one');
+      ratingStars.classList.add('stars__rating--one');
     } else if (stars === 2) {
-      ratingStars.classList.add ('stars__rating--two');
+      ratingStars.classList.add('stars__rating--two');
     } else if (stars === 3) {
-      ratingStars.classList.add ('stars__rating--three');
+      ratingStars.classList.add('stars__rating--three');
     } else if (stars === 4) {
-      ratingStars.classList.add ('stars__rating--four');
+      ratingStars.classList.add('stars__rating--four');
     } else {
-      ratingStars.classList.add ('stars__rating--five');
+      ratingStars.classList.add('stars__rating--five');
     }
   };
-  getRatingStars(goodsArray[goodsObject.rating.value]);
 
 
   var addStarCounts = function (rating) {
     var starRating = document.querySelector('.star__count');
     starRating.textContent = rating;
   };
-  addStarCounts(goodsArray[goodsObject.rating.number]);
 
 
   var getSugarFacts = function (isSugarAvailable) {
@@ -216,44 +192,63 @@ var addGoodsCardItems = function (picture) {
       sugarFact.textContent = 'Без сахара';
     }
   };
-  getSugarFacts(goodsArray[goodsObject.nutritionFacts.sugar]);
 
 
   var addContentsCards = function (content) {
     var cardsContentComposition = document.querySelector('.card__composition-list');
     cardsContentComposition.textContent = content;
   };
-  addStarCounts(goodsArray[goodsObject.nutritionFacts.contents]);
 
+  for (var i = 0; i < goodsAmount; i++) {
+    var newGoodsCard = template.cloneNode(true);
+    var currentGood = goods[i];
 
+    getCardsAmount(currentGood.amount, newGoodsCard);
+    addCardTitles(currentGood.name, newGoodsCard);
+    addCardPriceAndWeight(currentGood.price, currentGood.weight, newGoodsCard);
+    getRatingStars(currentGood.rating.value, newGoodsCard);
+    addStarCounts(currentGood.rating.number, newGoodsCard);
+    getSugarFacts(currentGood.nutritionFacts.sugar, newGoodsCard);
+    addContentsCards(currentGood.nutritionFacts.contents, newGoodsCard);
+
+  }
 };
-addGoodsCardItems(goodsArray[goodsObject.picture]);
+addGoodsCardItems();
 
 
-var cardAddedArray = [];
+var addedProducts = [];
+var addedGoodsAmount = 3;
 
 var addCardAddedItems = function () {
-  var template = document.querySelector ('#card-order').content;
-  for (var i = 0; i < 3; i++) {
-    var cardElements = template.cloneNode(true);
-    cardAddedArray.push(cardElements);
-  }
-
-  var addOrderCardsTitle = function (name) {
-    var orderCardTitle = cardAddedArray.querySelector('.card-order__title');
-    orderCardTitle.textContent = name;
-  };
-  addOrderCardsTitle(goodsArray[goodsObject.name]);
+  var template = document.querySelector('#card-order').content;
 
   var addCardOrderPrice = function (price) {
-    var orderCardPrice = cardAddedArray.querySelector('.card-order__price');
+    var orderCardPrice = addedProducts.querySelector('.card-order__price');
     orderCardPrice.textContent = price;
   };
-  addCardOrderPrice(goodsArray[goodsObject.price]);
 
+  var addOrderCardsTitle = function (name) {
+    var orderCardTitle = addedProducts.querySelector('.card-order__title');
+    orderCardTitle.textContent = name;
+  };
 
-  var newTemplate = document.querySelector ('.goods__cards');
-  newTemplate.appendChild(cardAddedArray);
+  var addNewPicture = function (picture) {
+    var goodsPicture = addedProducts.querySelector('.card-order__img');
+    goodsPicture.src = picture;
+  };
+
+  for (var i = 0; i < addedGoodsAmount; i++) {
+    var cardElements = template.cloneNode(true);
+    var addedGoods = goods[i];
+
+    addOrderCardsTitle(addedGoods.name, cardElements);
+    addCardOrderPrice(addedGoods.price, cardElements);
+    addNewPicture(addedGoods.picture, cardElements);
+  }
+
+  addedProducts.push(cardElements);
+  var newTemplate = document.querySelector('.goods__cards');
+  newTemplate.appendChild(addedProducts);
 
 };
 addCardAddedItems();
