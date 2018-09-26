@@ -103,7 +103,7 @@ var getRandomFromRange = function (min, max) {
 
 var getGoods = function () {
   for (var i = 0; i < goodsAmount; i++) {
-    
+
     var goodsObject = {};
     goodsObject.name = names.sort(getRandomStrict)[0];
     goodsObject.picture = pictures.sort(getRandomStrict)[0];
