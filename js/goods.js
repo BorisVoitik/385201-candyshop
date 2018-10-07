@@ -127,6 +127,7 @@ var getGoods = function () {
 getGoods();
 
 
+
 var uselessCatalogCards = document.querySelector('.catalog__cards--load');
 var uselessCatalogLoad = document.querySelector('.catalog__load');
 
