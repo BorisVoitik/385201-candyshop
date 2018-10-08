@@ -290,7 +290,7 @@ buyButtonHandler.addEventListener('click', function() {
     picture: addedProducts.querySelector('.card-order__img').src,
     price: addedProducts.querySelector('.card-order__price').textContent,
     orderedAmount = 1
-  }
+  };
 
   var copyOfGoodsObject = Object.assign({}, newGoodsCardsInCart);
   goodsInCart.push(copyOfGoodsObject);
