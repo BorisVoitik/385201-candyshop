@@ -126,12 +126,15 @@ var getGoods = function () {
 };
 getGoods();
 
+/*
 
 var uselessCatalogCards = document.querySelector('.catalog__cards--load');
 var uselessCatalogLoad = document.querySelector('.catalog__load');
 
 uselessCatalogCards.classList.remove('catalog__cards--load');
 uselessCatalogLoad.classList.add('visually-hidden');
+
+*/
 
 var addGoodsCardItems = function () {
   var template = document.querySelector('#card').content;
@@ -232,10 +235,14 @@ var addCardAddedItems = function () {
     orderCardTitle.textContent = name;
   };
 
-  var addNewPicture = function (picture) {
+  var addNewPictureAndAlt = function (picture, altname) {
     var goodsPicture = addedProducts.querySelector('.card-order__img');
     goodsPicture.src = picture;
+    goodsPicture.alt = altname;
   };
+
+
+
 
   for (var i = 0; i < addedGoodsAmount; i++) {
     var cardElements = template.cloneNode(true);
@@ -243,7 +250,7 @@ var addCardAddedItems = function () {
 
     addOrderCardsTitle(addedGoods.name, cardElements);
     addCardOrderPrice(addedGoods.price, cardElements);
-    addNewPicture(addedGoods.picture, cardElements);
+    addNewPictureAndAlt(addedGoods.picture, addedGoods.name, cardElements);
   }
 
   addedProducts.push(cardElements);
@@ -254,8 +261,106 @@ var addCardAddedItems = function () {
 addCardAddedItems();
 
 
+/*
+
 var uselessGoodsCards = document.querySelector('.goods__cards');
 var uselessCardEmpty = document.querySelector('.goods__card-empty');
 
 uselessGoodsCards.classList.remove('goods__cards--empty');
 uselessCardEmpty.classList.add('visually-hidden');
+
+*/
+
+
+var buttonFavorite = document.querySelector('.card__btn-favorite');
+var buttonClickHandler = function () {
+  buttonFavorite.classList.toggle('card__btn-favorite--selected');
+};
+
+
+var goodsInCart = [];
+
+var cardsTemplate = document.querySelector('.goods__cards');
+
+var buyButtonHandler = document.querySelector('.card__btn');
+buyButtonHandler.addEventListener('click', function() {
+
+  var newGoodsCardsInCart = {
+    name: addedProducts.querySelector('.card-order__title').textContent,
+    picture: addedProducts.querySelector('.card-order__img').src,
+    price: addedProducts.querySelector('.card-order__price').textContent,
+    orderedAmount = 1
+  }
+
+  var copyOfGoodsObject = Object.assign({}, newGoodsCardsInCart);
+  goodsInCart.push(copyOfGoodsObject);
+
+
+  var checkSameGoods = goodsInCart.forEach(function (good) {
+    if(goodsInCart.hasOwnProperty(name)) {
+      goodsInCart.amount += 1;
+      var inputValue = document.querySelector('.card-order__count input[value]');
+      inputValue += 1;
+    } 
+  });
+
+
+  var compareAmountOfGoods = function (array, good) {
+    for(var i = 0; i < array.length; i++) {
+      if(array[i].name === good.name && good.orderedAmount < array[i].amount) {
+        array[i].orderedAmount += 1;
+        var inputValue = document.querySelector('.card-order__count input[value]');
+        inputValue += 1;
+      }
+    }
+  };
+
+
+  var totalPrice = goodsInCart.reduce(function(sum, item) {
+    return sum = sum + item.price;
+  }, 0);
+
+
+  var cartUpdate = function {
+    document.querySelector('.main-header__basket').textContent = 'В корзине ' + goodsInCart.length + ' товара на ' + totalPrice + ' ₽';
+  }
+
+  
+});
+
+
+var storeButton = document.querySelector('#deliver__store');
+var courierButton = document.querySelector('#deliver__courier');
+
+var storeTab = document.querySelector('.deliver__store');
+var courierTab = document.querySelector('.deliver__courier');
+
+var chooseStoreTab = function () {
+  storeButton.addEventListener ('click', function() {
+    storeTab.classList.remove('visually-hidden');
+    courierTab.classList.add('visually-hidden');
+});
+
+var chooseCourierTab = function () {
+  courierTab.addEventListener ('click', function() {
+    courierTab.classList.remove('visually-hidden');
+    storeTab.classList.add('visually-hidden');
+});
+
+
+var rangeFilterLeft = document.querySelector('.range__btn--left');
+var rangeFilterRight = document.querySelector('.range__btn--right');
+
+var rangePriceMin = document.querySelector('.range__price--min');
+var rangePriceMax = document.querySelector('.range__price--max');
+
+rangeFilterLeft.addEventListener('mouseup', function {
+  var pinRange = event.clientX;
+  rangePriceMin.textContent = pinRange;
+
+});
+
+rangeFilterRight.addEventListener('mouseup', function {
+  var pinRange = event.clientX;
+  rangePriceMin.textContent = pinRange;
+});
