@@ -1,6 +1,7 @@
 'use strict';
 
 var goods = [];
+var goodsInCart = [];
 var goodsAmount = 26;
 
 var names = [
@@ -213,7 +214,49 @@ var addGoodsCardItems = function () {
     addStarCounts(currentGood.rating.number, newGoodsCard);
     getSugarFacts(currentGood.nutritionFacts.sugar, newGoodsCard);
     addContentsCards(currentGood.nutritionFacts.contents, newGoodsCard);
+    
+    var currentGoodInCart = Object.assign({}, currentGood);
+    currentGoodInCart.orderedAmount: = 1; 
+    goodsInCart.push(currentGoodInCart);
 
+
+    var cardsTemplate = currentGoodInCart.querySelector('.goods__cards');
+
+    var buyButtonHandler = currentGoodInCart.querySelector('.card__btn');
+    buyButtonHandler.addEventListener('click', function() {
+
+      var checkSameGoods = goodsInCart.forEach(function (good) {
+        if(goodsInCart.hasOwnProperty(name)) {
+          goodsInCart.amount += 1;
+          var inputValue = currentGoodInCart.querySelector('.card-order__count input[value]');
+          inputValue += 1;
+        } 
+      });
+
+    var compareAmountOfGoods = function (array, good) {
+    for(var i = 0; i < array.length; i++) {
+      if(array[i].name === good.name && good.orderedAmount < array[i].amount) {
+        array[i].orderedAmount += 1;
+        var inputValue = currentGoodInCart.querySelector('.card-order__count input[value]');
+        inputValue += 1;
+        }
+      }
+    };
+
+    var totalPrice = goodsInCart.reduce(function(sum, item) {
+      return sum = sum + item.price;
+    }, 0);
+
+
+    var cartUpdate = function {
+      document.querySelector('.main-header__basket').textContent = 'В корзине ' + goodsInCart.length + ' товара на ' + totalPrice + ' ₽';
+    }
+
+
+    }
+
+    //переместить кнопку покупки товара сюда
+    //новая переменная currentGoodInCart присвоить с помощью Обжект Ассайн
   }
 };
 addGoodsCardItems();
@@ -242,8 +285,11 @@ var addCardAddedItems = function () {
   };
 
 
+<<<<<<< HEAD
+=======
 
 
+>>>>>>> c81f317b57ee17f2b1ede280733f5a0fd505de72
   for (var i = 0; i < addedGoodsAmount; i++) {
     var cardElements = template.cloneNode(true);
     var addedGoods = goods[i];
@@ -278,6 +324,8 @@ var buttonClickHandler = function () {
 };
 
 
+<<<<<<< HEAD
+=======
 var goodsInCart = [];
 
 var cardsTemplate = document.querySelector('.goods__cards');
@@ -289,7 +337,7 @@ buyButtonHandler.addEventListener('click', function() {
     name: addedProducts.querySelector('.card-order__title').textContent,
     picture: addedProducts.querySelector('.card-order__img').src,
     price: addedProducts.querySelector('.card-order__price').textContent,
-    orderedAmount = 1
+    orderedAmount: = 1
   }
 
   var copyOfGoodsObject = Object.assign({}, newGoodsCardsInCart);
@@ -329,6 +377,7 @@ buyButtonHandler.addEventListener('click', function() {
 });
 
 
+>>>>>>> c81f317b57ee17f2b1ede280733f5a0fd505de72
 var storeButton = document.querySelector('#deliver__store');
 var courierButton = document.querySelector('#deliver__courier');
 
@@ -364,3 +413,22 @@ rangeFilterRight.addEventListener('mouseup', function {
   var pinRange = event.clientX;
   rangePriceMin.textContent = pinRange;
 });
+<<<<<<< HEAD
+
+//родставить клонированную переменную, искать в ней
+//вынести только функции наружу, чтобы появлялись перед тем, когда должны сработать
+
+//  var newGoodsCardsInCart = {
+//    name: addedProducts.querySelector('.card-order__title').textContent,
+//    picture: addedProducts.querySelector('.card-order__img').src,
+//    price: addedProducts.querySelector('.card-order__price').textContent,
+//    orderedAmount: = 1
+//  }
+
+
+//  var copyOfGoodCards = Object.assign({}, newGoodsCardsInCart); 
+//  goodsInCart.push(copyOfGoodCards);
+
+
+=======
+>>>>>>> c81f317b57ee17f2b1ede280733f5a0fd505de72
