@@ -1,8 +1,10 @@
 'use strict';
 
+console.log('sup!');
+
 var goods = [];
 var goodsInCart = [];
-var goodsAmount = 26;
+var goodsAmount = 6;
 
 var names = [
   'Чесночные сливки',
@@ -126,7 +128,7 @@ var getGoods = function () {
 
 };
 getGoods();
-/*
+
 
 var uselessCatalogCards = document.querySelector('.catalog__cards--load');
 var uselessCatalogLoad = document.querySelector('.catalog__load');
@@ -134,15 +136,14 @@ var uselessCatalogLoad = document.querySelector('.catalog__load');
 uselessCatalogCards.classList.remove('catalog__cards--load');
 uselessCatalogLoad.classList.add('visually-hidden');
 
-*/
-
-
+var mainCatalog = document.querySelector('.catalog__card');
+var fragment = document.createDocumentFragment();
 
 var addGoodsCardItems = function () {
   var template = document.querySelector('#card').content;
 
-  var getCardsAmount = function (allCards) {
-    var cardsCatalog = document.querySelector('.catalog__card');
+  var getCardsAmount = function (allCards, clone) {
+    var cardsCatalog = clone.querySelector('.catalog__card');
     if (allCards >= 1 && allCards <= 5) {
       cardsCatalog.classList.add('card--little');
     } else if (allCards === 0) {
@@ -153,22 +154,22 @@ var addGoodsCardItems = function () {
   };
 
 
-  var addCardTitles = function (title) {
-    var cardTitle = document.querySelector('.card__title');
+  var addCardTitles = function (title, clone) {
+    var cardTitle = clone.querySelector('.card__title');
     cardTitle.textContent = title;
   };
 
 
-  var addCardPriceAndWeight = function (price, weight) {
-    var cardPrice = document.querySelector('.card__price');
-    var cardWeight = document.querySelector('.card__weight');
+  var addCardPriceAndWeight = function (price, weight, clone) {
+    var cardPrice = clone.querySelector('.card__price');
+    var cardWeight = clone.querySelector('.card__weight');
     cardPrice.textContent = price;
     cardWeight.textContent = '/ ' + weight + ' Г';
   };
 
 
-  var getRatingStars = function (stars) {
-    var ratingStars = document.querySelector('.stars__rating');
+  var getRatingStars = function (stars, clone) {
+    var ratingStars = clone.querySelector('.stars__rating');
     if (stars === 1) {
       ratingStars.classList.add('stars__rating--one');
     } else if (stars === 2) {
@@ -183,14 +184,14 @@ var addGoodsCardItems = function () {
   };
 
 
-  var addStarCounts = function (rating) {
-    var starRating = document.querySelector('.star__count');
+  var addStarCounts = function (rating, clone) {
+    var starRating = clone.querySelector('.star__count');
     starRating.textContent = rating;
   };
 
 
-  var getSugarFacts = function (isSugarAvailable) {
-    var sugarFact = document.querySelector('.card__characteristic');
+  var getSugarFacts = function (isSugarAvailable, clone) {
+    var sugarFact = clone.querySelector('.card__characteristic');
     if (isSugarAvailable) {
       sugarFact.textContent = 'Содержит сахар';
     } else {
@@ -199,14 +200,15 @@ var addGoodsCardItems = function () {
   };
 
 
-  var addContentsCards = function (content) {
-    var cardsContentComposition = document.querySelector('.card__composition-list');
+  var addContentsCards = function (content, clone) {
+    var cardsContentComposition = clone.querySelector('.card__composition-list');
     cardsContentComposition.textContent = content;
   };
 
   for (var i = 0; i < goodsAmount; i++) {
     var newGoodsCard = template.cloneNode(true);
     var currentGood = goods[i];
+    
 
     getCardsAmount(currentGood.amount, newGoodsCard);
     addCardTitles(currentGood.name, newGoodsCard);
@@ -217,13 +219,13 @@ var addGoodsCardItems = function () {
     addContentsCards(currentGood.nutritionFacts.contents, newGoodsCard);
     
     var currentGoodInCart = Object.assign({}, currentGood);
-    currentGoodInCart.orderedAmount: = 1; 
+    currentGoodInCart.orderedAmount = 1; 
     goodsInCart.push(currentGoodInCart);
 
 
-    var cardsTemplate = currentGoodInCart.querySelector('.goods__cards');
+ //   var cardsTemplate = currentGoodInCart.querySelector('.goods__cards');
 
-    var buyButtonHandler = currentGoodInCart.querySelector('.card__btn');
+ /*   var buyButtonHandler = currentGoodInCart.querySelector('.card__btn');
     buyButtonHandler.addEventListener('click', function() {
 
       var checkSameGoods = goodsInCart.forEach(function (good) {
@@ -249,19 +251,21 @@ var addGoodsCardItems = function () {
     }, 0);
 
 
-    var cartUpdate = function {
+    var cartUpdate = function () {
       document.querySelector('.main-header__basket').textContent = 'В корзине ' + goodsInCart.length + ' товара на ' + totalPrice + ' ₽';
-    }
+    };
 
 
     });
-
-    //переместить кнопку покупки товара сюда
-    //новая переменная currentGoodInCart присвоить с помощью Обжект Ассайн
+*/
   }
+
 };
 addGoodsCardItems();
 
+
+    //переместить кнопку покупки товара сюда
+    //новая переменная currentGoodInCart присвоить с помощью Обжект Ассайн
 
 var addedProducts = [];
 var addedGoodsAmount = 3;
@@ -269,18 +273,18 @@ var addedGoodsAmount = 3;
 var addCardAddedItems = function () {
   var template = document.querySelector('#card-order').content;
 
-  var addCardOrderPrice = function (price) {
-    var orderCardPrice = addedProducts.querySelector('.card-order__price');
+  var addCardOrderPrice = function (price, clone) {
+    var orderCardPrice = clone.querySelector('.card-order__price');
     orderCardPrice.textContent = price;
   };
 
-  var addOrderCardsTitle = function (name) {
-    var orderCardTitle = addedProducts.querySelector('.card-order__title');
+  var addOrderCardsTitle = function (name, clone) {
+    var orderCardTitle = clone.querySelector('.card-order__title');
     orderCardTitle.textContent = name;
   };
 
-  var addNewPictureAndAlt = function (picture, altname) {
-    var goodsPicture = addedProducts.querySelector('.card-order__img');
+  var addNewPictureAndAlt = function (picture, altname, clone) {
+    var goodsPicture = clone.querySelector('.card-order__img');
     goodsPicture.src = picture;
     goodsPicture.alt = altname;
   };
@@ -302,7 +306,6 @@ var addCardAddedItems = function () {
 };
 addCardAddedItems();
 
-/*
 
 var uselessGoodsCards = document.querySelector('.goods__cards');
 var uselessCardEmpty = document.querySelector('.goods__card-empty');
@@ -310,7 +313,6 @@ var uselessCardEmpty = document.querySelector('.goods__card-empty');
 uselessGoodsCards.classList.remove('goods__cards--empty');
 uselessCardEmpty.classList.add('visually-hidden');
 
-*/
 
 var buttonFavorite = document.querySelector('.card__btn-favorite');
 var buttonClickHandler = function () {
@@ -328,13 +330,16 @@ var chooseStoreTab = function () {
   storeButton.addEventListener ('click', function() {
     storeTab.classList.remove('visually-hidden');
     courierTab.classList.add('visually-hidden');
-});
+  
+  })
+};
 
 var chooseCourierTab = function () {
   courierTab.addEventListener ('click', function() {
     courierTab.classList.remove('visually-hidden');
     storeTab.classList.add('visually-hidden');
-});
+  })
+};
 
 
 var rangeFilterLeft = document.querySelector('.range__btn--left');
@@ -343,16 +348,17 @@ var rangeFilterRight = document.querySelector('.range__btn--right');
 var rangePriceMin = document.querySelector('.range__price--min');
 var rangePriceMax = document.querySelector('.range__price--max');
 
-rangeFilterLeft.addEventListener('mouseup', function {
-  var pinRange = event.clientX;
-  rangePriceMin.textContent = pinRange;
 
-});
-
-rangeFilterRight.addEventListener('mouseup', function {
+rangeFilterLeft.addEventListener('mouseup', function(){
   var pinRange = event.clientX;
   rangePriceMin.textContent = pinRange;
 });
+
+rangeFilterRight.addEventListener('mouseup', function(){
+  var pinRange = event.clientX;
+  rangePriceMin.textContent = pinRange;
+});
+
 
 //родставить клонированную переменную, искать в ней
 //вынести только функции наружу, чтобы появлялись перед тем, когда должны сработать
@@ -369,3 +375,45 @@ rangeFilterRight.addEventListener('mouseup', function {
 //  goodsInCart.push(copyOfGoodCards);
 
 
+var getCorrectCardNumbers = function (array) {
+  var sum = 0;
+  for(var i = 0; i < array.length; i++)  {
+    if(array[i] % 2 != 0) {
+      array[i] *= 2;
+    }    
+  }
+
+  for(var j = 0; j < array.length; j++) {
+    if(array[j] >= 10) {
+      array[j] -= 9;
+    }
+  }
+
+  for(var k = 0; k < array.length; k++) {
+    sum += array[k];
+  }
+  return array;
+};
+
+var modal = document.querySelectorAll('.modal');
+var modalHidden = document.querySelectorAll('.modal--hidden');
+for (var i = 0; i <= modal.length; i++) {
+  modalHidden[i].addEventListener('click', function() {
+    modal[0].classList.add('modal--hidden');
+    modal[1].classList.add('modal--hidden');
+  });
+}
+
+var buyBtn = document.querySelector('.buy__submit-btn');
+
+buyBtn.add.eventListener('click', function() {
+  var cardNumbers = document.querySelector('.payment__card-number').value;
+  cardNumbers.split();
+  var finalCardNumbers = getCorrectCardNumbers(cardNumbers);
+
+  if (getCorrectCardNumbers(cardNumbers) % 10 !== 0) {
+    modal[0].classList.remove('modal--hidden');
+  } else {
+    modal[1].classList.remove('modal--hidden');
+  }
+});
